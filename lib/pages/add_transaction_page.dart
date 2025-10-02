@@ -178,9 +178,12 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
               TextField(
                 controller: _amountCtrl,
                 keyboardType: TextInputType.number,
-                decoration: _dec('Amount', 'Rp'),
+                decoration: _dec('Amount', '0').copyWith(
+                  prefixText: 'Rp ',
+                  prefixStyle: Theme.of(context).textTheme.bodyMedium,
+                ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 12),                
 
               // 8) Note
               TextField(
@@ -195,3 +198,4 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
     );
   }
 }
+
