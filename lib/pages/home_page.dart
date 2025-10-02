@@ -4,6 +4,7 @@ import 'budget_page.dart';
 import 'report_page.dart';
 import 'investment_page.dart';
 import 'goal_page.dart';
+import 'setting_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -28,7 +29,17 @@ class _HomePageState extends State<HomePage> {
           Text('HOMY BOOK', style: TextStyle(fontWeight: FontWeight.w700)),
         ]),
         centerTitle: true,
-        actions: [IconButton(icon: const Icon(Icons.settings), onPressed: ()=>ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Settings tapped (placeholder).'))))],
+        actions:[ 
+	  IconButton(
+      	    icon: const Icon(Icons.settings),
+      	    onPressed: () {
+              Navigator.push(
+          	context,
+          	MaterialPageRoute(builder: (context) => const SettingPage()),
+        	);
+            },
+          ),
+        ],
       ),
       body: IndexedStack(index: i, children: pages),
       bottomNavigationBar: NavigationBar(
