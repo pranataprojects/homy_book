@@ -14,17 +14,22 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
   // Simple local state (no validation, no persistence)
   String? _accountId;
   String _type = 'Expense'; // Income / Expense / Transfer
-  String? _toAccountId;     // only for Transfer
+  String? _toAccountId; // only for Transfer
   String? _category;
 
   final _detailsCtrl = TextEditingController();
-  final _amountCtrl  = TextEditingController();
-  final _noteCtrl    = TextEditingController();
+  final _amountCtrl = TextEditingController();
+  final _noteCtrl = TextEditingController();
 
   DateTime _date = DateTime.now();
 
-  final List<String> _expenseCats = const ['Food', 'Transport', 'Bills', 'Other'];
-  final List<String> _incomeCats  = const ['Salary', 'Bonus', 'Other'];
+  final List<String> _expenseCats = const [
+    'Food',
+    'Transport',
+    'Bills',
+    'Other'
+  ];
+  final List<String> _incomeCats = const ['Salary', 'Bonus', 'Other'];
 
   @override
   void initState() {
@@ -50,7 +55,20 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
       );
 
   String _fmtDate(DateTime d) {
-    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
+    ];
     final dd = d.day.toString().padLeft(2, '0');
     final mm = months[d.month - 1];
     return '$dd $mm ${d.year}';
@@ -93,7 +111,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
             children: [
               // 1) Account
               DropdownButtonFormField<String>(
-                value: _accountId,
+                initialValue: _accountId,
                 decoration: _dec('Account'),
                 items: widget.accounts
                     .map((a) => DropdownMenuItem(
@@ -124,7 +142,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
 
               // 3) Income / Expense / Transfer
               DropdownButtonFormField<String>(
-                value: _type,
+                initialValue: _type,
                 decoration: _dec('Income / Expense / Transfer'),
                 items: const ['Income', 'Expense', 'Transfer']
                     .map((t) => DropdownMenuItem(value: t, child: Text(t)))
@@ -140,7 +158,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
               // 4) Transfer To (only if Transfer chosen)
               if (isTransfer) ...[
                 DropdownButtonFormField<String>(
-                  value: _toAccountId,
+                  initialValue: _toAccountId,
                   decoration: _dec('Transfer To', '*only if Transfer chosen'),
                   items: widget.accounts
                       .where((a) => a['id'] != _accountId)
@@ -157,7 +175,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
               // 5) Category (only if Income/Expense chosen)
               if (!isTransfer) ...[
                 DropdownButtonFormField<String>(
-                  value: _category,
+                  initialValue: _category,
                   decoration: _dec('Category', '*depends on Income/Expense'),
                   items: (_type == 'Income' ? _incomeCats : _expenseCats)
                       .map((c) => DropdownMenuItem(value: c, child: Text(c)))
@@ -183,7 +201,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
                   prefixStyle: Theme.of(context).textTheme.bodyMedium,
                 ),
               ),
-              const SizedBox(height: 12),                
+              const SizedBox(height: 12),
 
               // 8) Note
               TextField(
@@ -198,4 +216,3 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
     );
   }
 }
-
