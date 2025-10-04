@@ -15,7 +15,8 @@ class ReportPage extends StatelessWidget {
       _Slice('Other', 5),
     ];
 
-    final monthly = const [ // Jan..Jun demo
+    final monthly = const [
+      // Jan..Jun demo
       3500000, 2800000, 4200000, 3100000, 3900000, 3600000
     ];
 
@@ -32,12 +33,15 @@ class ReportPage extends StatelessWidget {
                   sectionsSpace: 2,
                   centerSpaceRadius: 40,
                   sections: [
-                    for (int i=0;i<pieData.length;i++)
+                    for (int i = 0; i < pieData.length; i++)
                       PieChartSectionData(
                         value: pieData[i].value.toDouble(),
                         title: '${pieData[i].value.toInt()}%',
                         radius: 70,
-                        titleStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 12),
+                        titleStyle: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 12),
                       ),
                   ],
                 ),
@@ -59,7 +63,11 @@ class ReportPage extends StatelessWidget {
                       sideTitles: SideTitles(
                         showTitles: true,
                         interval: 2000000,
-                        getTitlesWidget: (v, m) => Text(NumberFormat.compactCurrency(locale: 'id_ID', symbol: 'Rp ').format(v), style: const TextStyle(fontSize: 10)),
+                        getTitlesWidget: (v, m) => Text(
+                            NumberFormat.compactCurrency(
+                                    locale: 'id_ID', symbol: 'Rp ')
+                                .format(v),
+                            style: const TextStyle(fontSize: 10)),
                         reservedSize: 56,
                       ),
                     ),
@@ -67,23 +75,42 @@ class ReportPage extends StatelessWidget {
                       sideTitles: SideTitles(
                         showTitles: true,
                         getTitlesWidget: (v, m) {
-                          const months = ['Jan','Feb','Mar','Apr','May','Jun'];
+                          const months = [
+                            'Jan',
+                            'Feb',
+                            'Mar',
+                            'Apr',
+                            'May',
+                            'Jun'
+                          ];
                           final idx = v.toInt();
                           return Padding(
                             padding: const EdgeInsets.only(top: 4),
-                            child: Text(idx>=0 && idx<months.length ? months[idx] : '', style: const TextStyle(fontSize: 11)),
+                            child: Text(
+                                idx >= 0 && idx < months.length
+                                    ? months[idx]
+                                    : '',
+                                style: const TextStyle(fontSize: 11)),
                           );
                         },
                       ),
                     ),
-                    topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                    rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                    topTitles: const AxisTitles(
+                        sideTitles: SideTitles(showTitles: false)),
+                    rightTitles: const AxisTitles(
+                        sideTitles: SideTitles(showTitles: false)),
                   ),
                   barGroups: [
-                    for (int i=0;i<monthly.length;i++)
+                    for (int i = 0; i < monthly.length; i++)
                       BarChartGroupData(
                         x: i,
-                        barRods: [BarChartRodData(toY: monthly[i].toDouble(), width: 18, borderRadius: const BorderRadius.vertical(top: Radius.circular(6)))],
+                        barRods: [
+                          BarChartRodData(
+                              toY: monthly[i].toDouble(),
+                              width: 18,
+                              borderRadius: const BorderRadius.vertical(
+                                  top: Radius.circular(6)))
+                        ],
                       ),
                   ],
                 ),
@@ -114,15 +141,18 @@ class _CardBox extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 8, offset: Offset(0,4))],
+        boxShadow: const [
+          BoxShadow(color: Colors.black12, blurRadius: 8, offset: Offset(0, 4))
+        ],
         border: Border.all(color: const Color(0xFFE0E0E0)),
       ),
       padding: const EdgeInsets.all(16),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
+        Text(title,
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
         const SizedBox(height: 12),
         child,
-        if (footer != null) ...[ const SizedBox(height: 12), footer! ],
+        if (footer != null) ...[const SizedBox(height: 12), footer!],
       ]),
     );
   }
@@ -139,7 +169,12 @@ class _PieLegend extends StatelessWidget {
       children: [
         for (final label in items)
           Row(mainAxisSize: MainAxisSize.min, children: [
-            Container(width: 12, height: 12, decoration: BoxDecoration(color: Colors.black12, borderRadius: BorderRadius.circular(3))),
+            Container(
+                width: 12,
+                height: 12,
+                decoration: BoxDecoration(
+                    color: Colors.black12,
+                    borderRadius: BorderRadius.circular(3))),
             const SizedBox(width: 6),
             Text(label),
           ]),
