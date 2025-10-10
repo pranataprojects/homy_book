@@ -71,27 +71,6 @@ class _LoginPageState extends State<LoginPage> {
                           onPressed: () => setState(() => hide = !hide))),
                 ),
                 const SizedBox(height: 20),
-                /*
-                SizedBox(
-                    width: double.infinity,
-                    height: 48,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF1792E8),
-                          foregroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12))),
-                      onPressed: () {
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (_) => const HomePage()),
-                        );
-                      },
-                      child: const Text('Sign In',
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w600)),
-                    )),
-                */
-                const SizedBox(height: 20),
                 SizedBox(
                   width: double.infinity,
                   height: 48,
@@ -109,7 +88,6 @@ class _LoginPageState extends State<LoginPage> {
                             final em = email.text.trim();
                             final pw = pass.text;
 
-                            // capture messenger BEFORE await (fixes async gap lint)
                             final messenger = ScaffoldMessenger.of(context);
 
                             if (em.isEmpty || pw.isEmpty) {
